@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body, button{
+            font-size: x-large;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+        button{
+
+            width: 100%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <p id="txt"></p>
+    <button onclick="clipboardCopy()">복사</button>
+</body>
+</html>
+<script>
+    var txt = new URLSearchParams(window.location.search).get('txt')
+    document.querySelector("#txt").textContent = txt
+    
+
+
+    function clipboardCopy(){
+        var str = document.querySelector("#txt").textContent.trim()
+        var tempElem = document.createElement('textarea');
+        tempElem.value = str;  
+        document.body.appendChild(tempElem);
+      
+        tempElem.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempElem);
+        alert(`${str}\n---------------------\n복사 완료`)
+    }
+</script>
